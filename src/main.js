@@ -20,10 +20,29 @@ class Game {
 	}
 
 	moveDisc(fromPegNum, toPegNum) {
+		if (typeof fromPegNum !== "number" && typeof fromPegNum !== "number") {
+			console.error("Error: Please provide two numbers to moveDisc function!");
+			return;
+		}
+
+		if (fromPegNum === toPegNum) {
+			console.error("Error: You entered the same peg number!");
+		}
+
+		if (fromPegNum > this.numPegs || toPegNum > this.numPegs) {
+			console.error("Error: You entered a peg number the does not exist!");
+			return;
+		}
+
 		const currPeg = this.board[fromPegNum - 1];
 		const targetPeg = this.board[toPegNum - 1];
 
-		if (targetPeg.at(-1) > targetPeg.at(-1) || targetPeg.at(-1) === "---") {
+		if (currPeg.at(-1) === "---") {
+			console.error("Error: There are no discs left on the current peg!");
+			return;
+		}
+
+		if (currPeg.at(-1) < targetPeg.at(-1) || targetPeg.at(-1) === "---") {
 			console.log(
 				`Moving disc ${currPeg.at(
 					-1
@@ -35,8 +54,8 @@ class Game {
 				resetGame();
 			}
 		} else {
-			console.log(
-				`You cannot make this move right now. Disc ${currPeg.at(
+			console.error(
+				`Error: You cannot make this move right now. Disc ${currPeg.at(
 					-1
 				)} cannot be placed on top of disc ${targetPeg.at(-1)}`
 			);
