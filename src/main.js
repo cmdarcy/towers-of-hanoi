@@ -27,6 +27,7 @@ class Game {
 
 		if (fromPegNum === toPegNum) {
 			console.error("Error: You entered the same peg number!");
+			return;
 		}
 
 		if (fromPegNum > this.numPegs || toPegNum > this.numPegs) {
@@ -51,7 +52,7 @@ class Game {
 			targetPeg.push(currPeg.pop());
 			this.printBoard();
 			if (this.checkWinner()) {
-				resetGame();
+				this.resetGame();
 			}
 		} else {
 			console.error(
