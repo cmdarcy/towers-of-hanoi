@@ -65,13 +65,24 @@ class Game {
 	}
 
 	checkWinner() {
-		if (
-			this.board[0].length === 1 &&
-			this.board.some((peg) => peg.length === this.numDiscs + 1)
-		) {
-			return true;
+		if (this.board[0].length !== 1) {
+			return false;
 		}
-		return false;
+
+		return this.board.some((peg) => {
+			if (peg.length - 1 !== this.numDiscs) {
+				return false;
+			}
+
+			for (let index = 1; index < peg.length; index++) {
+				const disc = peg[index];
+				const expectedDisc = this.numDiscs - index + 1;
+				if (disc !== expectedDisc) {
+					return false;
+				}
+			}
+			return true;
+		});
 	}
 
 	resetGame() {

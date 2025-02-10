@@ -75,6 +75,11 @@ describe("checkWinner method", () => {
 		game.board = [["---"], ["---", 5, 4, 3, 2, 1], ["---"]];
 		expect(game.checkWinner()).toBe(true);
 	});
+
+	it("returns false when the discs are not in the correct order on a peg", () => {
+		game.board = [["---"], ["---", 5, 4, 3, 1, 2], ["---"]];
+		expect(game.checkWinner()).toBe(false);
+	});
 });
 
 describe("resetGame method", () => {
